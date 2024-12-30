@@ -1,0 +1,18 @@
+services:
+
+  php-apache:
+    image: caracolazul/nadcp-apache:php7
+    build:
+      context: docker/php-apache
+      args:
+        PHP_VERSION: 7.4
+        # PHP_CONFIGURE_GD_OPTS: ${GD_OPTS_PRE_74}
+        PHP_CONFIGURE_GD_OPTS: ${GD_OPTS_POST_74}
+        # LOGIN_UID: ${LOGIN_UID:-1000}
+    environment:
+      - XDEBUG_CONFIG=PHP 7 Conf
+      # - APACHE_RUN_USER=${USER_NAME:-docker-user}
+    ports:
+      - 8080:8080
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
